@@ -1,17 +1,35 @@
 
 const URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/<word>'
 const result = document.getElementById("result");
-const inp = document.getElementById("serch");
+const formulario = document.getElementById("serch");
 
-inp.addEventListener("submit", () => {
-  let inpPalabra = document.getElementById("inp_palabra").value;
-  console.log(inpPalabra);
-  fetch(`${URL}${inpPalabra}`)
-    .then((Response) => Response.json)
-    .then((data) => {
-      console.log(data);
-      result.innerHTML = ``;
-    });
+formulario.addEventListener("submit", () => {
+  e.preventDefault().value;
+  console.log("Enviar formulario");
+  const data = new URLSearchParams(new FormData(formulario));
+  console.log(data.get('#SerchBox'));
+  console.log(data.get('#SerchInput'));
+  console.log(data.get('#Detalles'));
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '6a06afaae8msh2d73cfaa3646ec0p1c7585jsn7d048ff5332d',
+      'X-RapidAPI-Host': 'dictionary35.p.rapidapi.com'
+    },
+  };
+  
+  fetch(URL, options)
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      const { definitions } = response.data
+      const { definitionText } = definitions[0];
+      console.log(definitionText);
+      result.innerText = definitionText
+    })
+    .catch(err => console.error(err));
+
 });
 
 

@@ -7,14 +7,34 @@
         <title>Document</title>
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
     </head>
+    
     <body>
         <main class="Container">
             <h1>Dictionary</h1>
             <form id="formulario" action="">
-                <textarea required cols="5" rows="1"></textarea>
-                <input type="submit" value="Buscar">
-                <textarea cols="30" rows="20" disabled></textarea>
 
+                <div class="SerchBox">
+                    <input type="text"
+                    id="inp_palabra">
+                </div>
+
+                <div class="SerchInput" id="serch">
+                    <input type="submit" value="Buscar">
+                </div>
+
+                <div class="result" id="result">
+                    <!-- <div class="audio">
+                    </div> -->
+
+                    <div class="Detalles">
+                        <h2>Resultados</h2>
+                        <p>Significado  /Ejemplo/</p>
+                    </div>
+
+                    <p class="significado">Significados</p>
+                    <p class="ejemplo">Ejemplos</p>
+
+                </div>
             </form>
         </main>
         <script src="./main.js"></script>

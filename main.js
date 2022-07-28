@@ -1,40 +1,60 @@
 
 const URL = 'https://api.dictionaryapi.dev/api/v2/entries/en/<word>'
-const result = document.getElementById("result");
-const formulario = document.getElementById("serch");
+const Container = document.querySelector(".Container"),
+SearchInput = Container.querySelector(".input"),
+infoText = Container.querySelector(".info_text"),
+Synonyms = Container.querySelector(".synonyms .list"),
+remove = Container.querySelector(".serch span");
 
-formulario.addEventListener("submit", () => {
-  e.preventDefault().value;
-  console.log("Enviar formulario");
-  const data = new URLSearchParams(new FormData(formulario));
-  console.log(data.get('#SerchBox'));
-  console.log(data.get('#SerchInput'));
-  console.log(data.get('#Detalles'));
+function data(result, word) {
+  if(result.title) {
+    infoText.innerHTML = `No se encontro el significado de ${word}`;
+  }else{
+    Container.classList.add("active");
+    let definitions = result[0].meanings[0].document[0];
+    document.querySelector(".word p").innerText = result[0].word;
+    document.querySelector(".meaning span").innerText = definitions.definition;
+    document.querySelector(".example span").innerText = definitions.example;
 
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': '6a06afaae8msh2d73cfaa3646ec0p1c7585jsn7d048ff5332d',
-      'X-RapidAPI-Host': 'dictionary35.p.rapidapi.com'
-    },
-  };
-  
-  fetch(URL, options)
-    .then(response => response.json())
-    .then(response => {
-      console.log(response);
-      const { definitions } = response.data
-      const { definitionText } = definitions[0];
-      console.log(definitionText);
-      result.innerText = definitionText
-    })
-    .catch(err => console.error(err));
+    if(definitions.Synonyms[0] == undefined) {
+      Synonyms.parentElement.style.display = "none";
+    }else{
+      Synonyms.parentElement.style.display = "block";
+      Synonyms.innerHTML = "";
+      for (let i = 0; i < 5; i++) {
+        Synonyms.insertAdjacentHTML("beforeend",tag);
+      }
+    }
+  }
+}
 
+function fetchapi(word) {
+  fetchapi(word);
+  SearchInput.value = word;
+}
+
+function fetchapi(word) {
+  Container.classList.remove("active");
+  infoText.innerHTML = `Searching the meaning of ${word}`;
+  let url `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
+  fetch(url).then(response => response.json()).then(result => data(result, word)).catch(() => {
+    infoText.innerHTML = `Can't find the meaning of ${word}`;
+  });
+}
+
+SearchInput.addEventListener("keyup", e => {
+  let word = e.target.value.replace(/\s+/g, ' ');
+  if(e.key == "Enter" && word) {
+    fetchapi(word);
+  }
 });
 
-
-
-
+remove.addEventListener("click", () => {
+  SearchInput.value = "";
+  SearchInput.focus();
+  Container.SclassList.remove("active");
+  infoText.innerHTML = "type any existing word and press enter to get meaning";
+})
 
 
 /*

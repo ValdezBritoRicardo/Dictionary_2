@@ -10,31 +10,51 @@
     
     <body>
         <main class="Container">
-            <h1>Dictionary</h1>
+            <header>DICTIONARY</header>
             <form id="formulario" action="">
 
                 <div class="SerchBox">
-                    <input type="text"
-                    id="inp_palabra"
-                    >
+                    <input type="text" id="inp_palabra">
+                    <i class="serch"></i>
+                    <span class="material"></span>
                 </div>
+                <p class="info_text">Escriba la palabra que decee buscar</p>
 
                 <div class="SerchInput" id="serch">
                     <input type="submit" value="Buscar">
                 </div>
 
-                <div class="result" id="result">
-                    <!-- <div class="audio">
-                    </div> -->
+                <div class="content">
+                    <p>meaning /example/</p>
+                    <ul>
+                        <li class="word">
+                            <div class="details">
+                                <p></p>
+                                <span></span>
+                            </div>
+                        </li>
 
-                    <div class="Detalles">
-                        <h2>Resultados</h2>
-                        <p>Significado  /Ejemplo/</p>
-                    </div>
+                        <li class="meaning">
+                            <div class="details">
+                                <p>Significado</p>
+                                <span></span>
+                            </div>
+                        </li>
 
-                    <p class="significado">Significados</p>
-                    <p class="ejemplo">Ejemplos</p>
+                        <li class="example">
+                            <div class="details">
+                                <p>Ejemplo</p>
+                                <span></span>
+                            </div>
+                        </li>
 
+                        <li class="synonyms">
+                            <div class="details">
+                                <p>Sinónimos</p>
+                                <div class="list"></div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </form>
         </main>
